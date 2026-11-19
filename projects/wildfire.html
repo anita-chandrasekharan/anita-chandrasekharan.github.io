@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UK wildfire infrastructure exposure · Anita Chandrasekharan</title>
+  <meta name="description" content="Wind-aware exposure zones around NASA-detected wildfires, showing which UK roads and industrial assets are at risk.">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <a class="brand" href="../">Anita Chandrasekharan</a>
+      <nav><a href="../#projects">Projects</a><a href="../#contact">Contact</a></nav>
+    </div>
+  </header>
+
+  <main class="wrap case">
+    <h1>UK wildfire infrastructure exposure</h1>
+    <p class="summary">Which roads and industrial sites are downwind of an active wildfire right now? An interactive dashboard that combines NASA satellite fire detections, OpenStreetMap infrastructure and wind-driven exposure zones.</p>
+
+    <div class="facts">
+      <div><span>Area</span>United Kingdom</div>
+      <div><span>Period</span>June 2026 snapshot</div>
+      <div><span>Data</span>NASA FIRMS (VIIRS), OpenStreetMap</div>
+      <div><span>Tools</span>PostGIS, GeoPandas, Streamlit, Folium</div>
+    </div>
+
+    <!-- TODO: add a screenshot or GIF of the dashboard, e.g. <p><img src="../assets/wildfire-dashboard.png" alt="Dashboard showing wind-driven exposure zones over UK roads"></p> -->
+
+    <h2>The problem</h2>
+    <p>Wildfire spread and smoke follow the wind. A fixed circular buffer around a fire treats upwind and downwind assets the same, which can overstate risk on one side and understate it on the other. Insurers, utilities and emergency planners need a quick, wind-aware first look at which assets are in the path of a fire.</p>
+
+    <h2>Data</h2>
+    <ul>
+      <li><strong>Active fires:</strong> NASA FIRMS VIIRS S-NPP near-real-time hotspots for the UK, including fire radiative power (FRP).</li>
+      <li><strong>Infrastructure:</strong> 1,868 commercial, industrial and warehouse buildings and 12,624 road segments from OpenStreetMap, fetched with the Overpass API around the most intense fires.</li>
+    </ul>
+
+    <h2>Method</h2>
+    <ol>
+      <li>Load fire hotspots and infrastructure into a PostgreSQL + PostGIS database with GiST spatial indexes.</li>
+      <li>Reproject to British National Grid (EPSG:27700) so all distances are in true metres.</li>
+      <li>For each fire, build an exposure zone: a 400 m base buffer that is stretched, shifted and rotated downwind in proportion to wind speed and bearing.</li>
+      <li>Overlay the zones on roads and assets in an interactive Streamlit + Folium map, where wind sliders update the zones instantly.</li>
+    </ol>
+
+    <h2>Results</h2>
+    <p>The June 2026 snapshot covers 27 fire detections. Moving the wind sliders shows how the set of exposed roads and buildings shifts with wind direction, which a static buffer cannot capture.</p>
+
+    <h2>What it means</h2>
+    <div class="callout"><p>A light-weight, open-data screening tool like this can help an operator decide in minutes which sites to check first during a fire event, before a detailed fire-behaviour model is run.</p></div>
+
+    <h2>Limitations and next steps</h2>
+    <ul>
+      <li>The exposure zones are a simple geometric wind model, not a physical fire-spread or smoke model.</li>
+      <li>Wind is set by the user. Next: pull live wind from a weather API.</li>
+      <li>Next: an asset vulnerability score (distance, asset type, FRP) and a machine-learning model of fire likelihood from vegetation, weather and terrain.</li>
+    </ul>
+
+    <p><a href="https://github.com/anita-chandrasekharan/geoai-wildfire-dashboard">View the code on GitHub</a></p>
+  </main>
+
+  <footer>
+    <div class="wrap"><a href="../">← Back to all projects</a></div>
+  </footer>
+</body>
+</html>
