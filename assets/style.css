@@ -1,0 +1,80 @@
+:root {
+  --bg: #fbfaf7;
+  --surface: #ffffff;
+  --text: #1d2a2e;
+  --muted: #5b6b70;
+  --accent: #1f6f5c;
+  --accent-soft: #e3f0ec;
+  --border: #e4e2dc;
+  --maxw: 960px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #11181a;
+    --surface: #182225;
+    --text: #e6eceb;
+    --muted: #9fb0b2;
+    --accent: #6cc4a8;
+    --accent-soft: #1e3330;
+    --border: #2a383b;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  font-size: 17px;
+}
+a { color: var(--accent); }
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+header.nav { border-bottom: 1px solid var(--border); }
+header.nav .wrap { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; padding-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+header.nav .brand { font-weight: 700; text-decoration: none; color: var(--text); }
+header.nav nav a { margin-left: 18px; text-decoration: none; color: var(--muted); font-size: 15px; }
+header.nav nav a:hover { color: var(--accent); }
+
+.hero { padding-top: 72px; padding-bottom: 48px; }
+.hero .eyebrow { color: var(--accent); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; font-size: 13px; margin: 0 0 12px; }
+.hero h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.15; margin: 0 0 18px; }
+.hero p.lead { font-size: 19px; color: var(--muted); max-width: 680px; margin: 0 0 28px; }
+.btn { display: inline-block; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; margin: 0 10px 10px 0; }
+.btn.primary { background: var(--accent); color: var(--bg); }
+.btn.ghost { border: 1px solid var(--border); color: var(--text); }
+
+section { padding: 40px 0; }
+section h2 { font-size: 26px; margin: 0 0 20px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; }
+.card h3 { margin: 0 0 8px; font-size: 19px; }
+.card p { margin: 0 0 14px; color: var(--muted); font-size: 15.5px; flex: 1; }
+.card .links a { font-size: 15px; margin-right: 14px; font-weight: 600; }
+.status { align-self: flex-start; font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); margin-bottom: 12px; }
+.status.planned { background: transparent; border: 1px dashed var(--border); color: var(--muted); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; padding: 0; list-style: none; }
+.tags li { font-size: 12.5px; padding: 2px 8px; border-radius: 6px; background: var(--accent-soft); color: var(--text); }
+
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px; }
+.skills h3 { font-size: 15px; margin: 0 0 6px; color: var(--accent); }
+.skills p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+/* Case study pages */
+.case { padding-top: 48px; padding-bottom: 48px; }
+.case h1 { font-size: clamp(28px, 4.5vw, 40px); line-height: 1.2; margin: 0 0 12px; }
+.case .summary { font-size: 19px; color: var(--muted); margin: 0 0 24px; }
+.case h2 { font-size: 22px; margin: 36px 0 10px; }
+.case .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; margin: 0 0 12px; }
+.case .facts div span { display: block; font-size: 12.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.case img { max-width: 100%; border-radius: 10px; border: 1px solid var(--border); }
+.callout { background: var(--accent-soft); border-radius: 10px; padding: 16px 20px; }
+
+footer { border-top: 1px solid var(--border); padding: 28px 0 40px; color: var(--muted); font-size: 14.5px; margin-top: 32px; }
+@media (max-width: 560px) {
+  header.nav nav a { margin: 0 14px 0 0; }
+  .hero { padding-top: 48px; padding-bottom: 32px; }
+}
