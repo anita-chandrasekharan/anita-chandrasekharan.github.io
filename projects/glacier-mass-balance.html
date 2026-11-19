@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Himalayan glacier health from space · Anita Chandrasekharan</title>
+  <meta name="description" content="PhD research: reconstructing 30 years of annual mass balance for 91 Himalayan glaciers using only satellite data.">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <a class="brand" href="../">Anita Chandrasekharan</a>
+      <nav><a href="../#projects">Projects</a><a href="../#contact">Contact</a></nav>
+    </div>
+  </header>
+
+  <main class="wrap case">
+    <h1>Measuring Himalayan glacier health from space</h1>
+    <p class="summary">My PhD research at IIT Bombay: a satellite-only method to estimate how much ice Himalayan glaciers gain or lose each year, used to reconstruct 30 years of change for 91 glaciers where field data is scarce.</p>
+
+    <div class="facts">
+      <div><span>Area</span>Chandra basin, Western Himalayas, India</div>
+      <div><span>Period</span>1989 to 2020</div>
+      <div><span>Data</span>Landsat, IRS LISS-3/4, SRTM 30 m DEM</div>
+      <div><span>Output</span>Annual mass balance for 91 glaciers</div>
+    </div>
+
+    <!-- TODO: add a figure, e.g. the snowline map or the cumulative mass balance chart from the thesis:
+         <p><img src="../assets/glacier-mass-balance.png" alt="Cumulative mass balance of Chandra basin glaciers, 1989 to 2020"></p> -->
+
+    <h2>The problem</h2>
+    <p>Himalayan glaciers feed the rivers that northern India depends on for drinking water, farming and hydropower. To plan for future water supply, we need to know whether these glaciers are growing or shrinking each year, a measure called <strong>mass balance</strong>.</p>
+    <p>Measuring mass balance in the field means hauling equipment across rugged, high-altitude terrain every year. As a result, only a handful of Indian Himalayan glaciers have field records, and most of those cover less than six years.</p>
+
+    <h2>Data</h2>
+    <ul>
+      <li><strong>Satellite images:</strong> 79 cloud-free Landsat and Indian Remote Sensing (IRS) images from the summer melt season (mid-June to mid-October), 1989 to 2020.</li>
+      <li><strong>Elevation:</strong> SRTM 30 m digital elevation model.</li>
+      <li><strong>Validation:</strong> high-resolution LISS-4 images and published field measurements for Chhota Shigri glacier, one of the best-studied glaciers in the region.</li>
+    </ul>
+
+    <h2>Method</h2>
+    <p>At the end of each summer, the snowline on a glacier marks the boundary between the zone that gained ice and the zone that lost it (the equilibrium line). The higher that line, the more ice the glacier lost that year. I turned this idea into a repeatable, satellite-only workflow:</p>
+    <ol>
+      <li><strong>Map the snowline:</strong> classify each image into snow and ice (maximum likelihood classification), then read the snowline's altitude from the DEM.</li>
+      <li><strong>Find the end-of-summer line:</strong> instead of relying on a single image, fit a second-order polynomial to snowline altitudes from several images across the season to pinpoint the yearly peak, even when the exact date wasn't imaged.</li>
+      <li><strong>Convert to mass balance:</strong> apply the equilibrium-line / mass-balance-gradient method (Rabatel et al., 2005), calibrated on Chhota Shigri glacier.</li>
+      <li><strong>Quantify uncertainty:</strong> propagate errors from classification, DEM and inputs. In doing so I derived a corrected uncertainty equation, fixing a dimensional error in the published version.</li>
+      <li><strong>Scale up:</strong> apply the calibrated method to all 91 glaciers larger than 1 km² in the Chandra basin.</li>
+    </ol>
+
+    <h2>Results</h2>
+    <ul>
+      <li><strong>Accurate:</strong> the multi-image approach matched field-based equilibrium lines with R² = 0.81 (RMSE 49 m), better than the standard single-image approach. Annual mass balance matched field data for 2003 to 2019 with R² = 0.81 and RMSE of 0.31 m water equivalent.</li>
+      <li><strong>Robust:</strong> sensitivity tests showed results are not very sensitive to the mass-balance gradient, so the method can be transferred to unmonitored glaciers in the same climate region.</li>
+      <li><strong>Regional picture:</strong> Chandra basin glaciers were near steady state from 1989 to 1999, then lost mass at an accelerating rate. Average loss was −0.47 ± 0.50 m water equivalent per year, or about <strong>7.5 ± 4.4 gigatonnes of ice between 1989 and 2020</strong>.</li>
+      <li><strong>Drivers:</strong> a glacier's median elevation and longitude were statistically significant predictors of its average mass balance.</li>
+    </ul>
+
+    <h2>What it means</h2>
+    <div class="callout"><p>Low-cost, freely available satellite data can fill decades of gaps in glacier records across the Himalayas. That gives water resource planners, hydropower operators and climate-risk analysts a consistent, region-wide view of glacier change where field measurement is impractical.</p></div>
+
+    <h2>Limitations and next steps</h2>
+    <ul>
+      <li>The method gives one annual value per glacier: no seasonal breakdown or spatial pattern within a glacier.</li>
+      <li>It needs a clearly visible end-of-summer snowline and assumes the mass-balance gradient stays constant over time.</li>
+      <li>Snowline mapping was partly manual. Today this could be automated with Google Earth Engine, Sentinel-2 and Landsat time series, and deep-learning segmentation, making it possible to monitor thousands of glaciers every year.</li>
+    </ul>
+
+    <h2>Publications</h2>
+    <ul>
+      <li>Chandrasekharan, A., Ramsankaran, R., Pandit, A. and Rabatel, A. (2018). Quantification of annual glacier surface mass balance for the Chhota Shigri Glacier, Western Himalayas, India using an Equilibrium-Line Altitude (ELA) based approach. <em>International Journal of Remote Sensing</em>. <a href="https://doi.org/10.1080/01431161.2018.1506182">doi:10.1080/01431161.2018.1506182</a></li>
+      <li>Presented at EGU General Assembly (Vienna, 2017), AGU Fall Meeting (Washington DC, 2018), Water Future Conference (Bengaluru, 2019) and MIGM Workshop (2022).</li>
+    </ul>
+  </main>
+
+  <footer>
+    <div class="wrap"><a href="../">← Back to all projects</a></div>
+  </footer>
+</body>
+</html>
